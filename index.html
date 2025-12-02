@@ -14,7 +14,8 @@
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
             line-height: 1.6;
-            color: #333;
+            color: #000;
+            background: #fff;
         }
 
         .container {
@@ -25,12 +26,12 @@
 
         /* Navigation */
         .navbar {
-            background: #fff;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            background: #000;
             padding: 1rem 0;
             position: sticky;
             top: 0;
             z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.3);
         }
 
         .navbar .container {
@@ -43,9 +44,8 @@
         .logo {
             font-size: 1.8rem;
             font-weight: bold;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+            color: #fff;
+            letter-spacing: 2px;
         }
 
         .nav-links {
@@ -57,63 +57,90 @@
 
         .nav-links a {
             text-decoration: none;
-            color: #333;
+            color: #fff;
             font-weight: 500;
             transition: color 0.3s;
         }
 
         .nav-links a:hover {
-            color: #667eea;
+            color: #888;
         }
 
         .cta-btn {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white !important;
+            background: #fff;
+            color: #000 !important;
             padding: 0.6rem 1.5rem;
             border-radius: 25px;
+            font-weight: 600;
         }
 
         /* Hero */
         .hero {
-            padding: 6rem 0;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 8rem 0;
+            background: linear-gradient(135deg, #000 0%, #333 100%);
             color: white;
             text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            width: 300px;
+            height: 300px;
+            background: rgba(255,255,255,0.05);
+            border-radius: 50%;
+            top: -100px;
+            right: -100px;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
         }
 
         .hero h1 {
-            font-size: 3rem;
+            font-size: 3.5rem;
             margin-bottom: 1.5rem;
             line-height: 1.2;
+            position: relative;
+            z-index: 1;
         }
 
         .hero p {
-            font-size: 1.2rem;
+            font-size: 1.3rem;
             margin-bottom: 2rem;
             max-width: 700px;
             margin-left: auto;
             margin-right: auto;
-            opacity: 0.95;
+            opacity: 0.9;
+            position: relative;
+            z-index: 1;
         }
 
         .btn {
-            padding: 1rem 2rem;
+            padding: 1rem 2.5rem;
             border: none;
             border-radius: 30px;
             font-size: 1rem;
             font-weight: 600;
             cursor: pointer;
             margin: 0.5rem;
-            transition: transform 0.3s;
+            transition: all 0.3s;
+            position: relative;
+            z-index: 1;
         }
 
         .btn:hover {
-            transform: translateY(-2px);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.3);
         }
 
         .btn-primary {
-            background: white;
-            color: #667eea;
+            background: #fff;
+            color: #000;
         }
 
         .btn-secondary {
@@ -122,17 +149,178 @@
             border: 2px solid white;
         }
 
+        /* AR Demo Section */
+        .ar-demo {
+            padding: 6rem 0;
+            background: #f5f5f5;
+            text-align: center;
+        }
+
+        .ar-demo h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: #000;
+        }
+
+        .ar-demo p {
+            font-size: 1.2rem;
+            margin-bottom: 3rem;
+            color: #333;
+        }
+
+        .demo-container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: #000;
+            border-radius: 20px;
+            padding: 3rem;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .ar-viewer {
+            background: #fff;
+            border-radius: 15px;
+            padding: 2rem;
+            min-height: 500px;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+        }
+
+        .dish-3d {
+            width: 300px;
+            height: 300px;
+            position: relative;
+            transform-style: preserve-3d;
+            animation: rotate3d 8s linear infinite;
+        }
+
+        @keyframes rotate3d {
+            0% { transform: rotateY(0deg) rotateX(10deg); }
+            100% { transform: rotateY(360deg) rotateX(10deg); }
+        }
+
+        .dish-image {
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #e0e0e0 0%, #f5f5f5 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 8rem;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.2);
+            position: relative;
+        }
+
+        .dish-image::after {
+            content: '';
+            position: absolute;
+            width: 120%;
+            height: 120%;
+            border: 3px solid #000;
+            border-radius: 50%;
+            opacity: 0.1;
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); opacity: 0.1; }
+            50% { transform: scale(1.1); opacity: 0.05; }
+        }
+
+        .dish-info {
+            margin-top: 2rem;
+            color: #000;
+        }
+
+        .dish-info h3 {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .dish-info p {
+            font-size: 1.1rem;
+            color: #666;
+            margin-bottom: 1rem;
+        }
+
+        .price {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #000;
+        }
+
+        .ar-controls {
+            margin-top: 2rem;
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .ar-btn {
+            padding: 0.8rem 1.5rem;
+            background: #000;
+            color: #fff;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+
+        .ar-btn:hover {
+            background: #333;
+            transform: scale(1.05);
+        }
+
+        .translation-demo {
+            margin-top: 2rem;
+            padding: 1.5rem;
+            background: #f9f9f9;
+            border-radius: 10px;
+            border: 2px solid #000;
+        }
+
+        .language-selector {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-bottom: 1rem;
+        }
+
+        .lang-btn {
+            padding: 0.5rem 1rem;
+            background: #fff;
+            border: 2px solid #000;
+            border-radius: 20px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+
+        .lang-btn:hover, .lang-btn.active {
+            background: #000;
+            color: #fff;
+        }
+
         /* Features */
         .features {
             padding: 6rem 0;
-            background: #f8f9fa;
+            background: #fff;
         }
 
         .features h2 {
             text-align: center;
             font-size: 2.5rem;
             margin-bottom: 3rem;
-            color: #333;
+            color: #000;
         }
 
         .features-grid {
@@ -142,39 +330,117 @@
         }
 
         .feature-card {
-            background: white;
-            padding: 2rem;
+            background: #f5f5f5;
+            padding: 2.5rem;
             border-radius: 15px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            border: 2px solid #000;
             text-align: center;
+            transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #000;
+            transform: translateY(100%);
             transition: transform 0.3s;
+            z-index: 0;
+        }
+
+        .feature-card:hover::before {
+            transform: translateY(0);
         }
 
         .feature-card:hover {
-            transform: translateY(-5px);
+            color: #fff;
+        }
+
+        .feature-card > * {
+            position: relative;
+            z-index: 1;
         }
 
         .feature-icon {
-            font-size: 3rem;
+            font-size: 3.5rem;
             margin-bottom: 1rem;
         }
 
         .feature-card h3 {
-            color: #667eea;
+            color: #000;
             margin-bottom: 1rem;
-            font-size: 1.3rem;
+            font-size: 1.4rem;
+            transition: color 0.3s;
+        }
+
+        .feature-card:hover h3 {
+            color: #fff;
+        }
+
+        /* 3D Gallery */
+        .gallery-3d {
+            padding: 6rem 0;
+            background: #000;
+            color: #fff;
+        }
+
+        .gallery-3d h2 {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .gallery-item {
+            background: #fff;
+            border-radius: 15px;
+            overflow: hidden;
+            transition: transform 0.3s;
+            cursor: pointer;
+        }
+
+        .gallery-item:hover {
+            transform: scale(1.05) rotateZ(2deg);
+        }
+
+        .gallery-image {
+            width: 100%;
+            height: 250px;
+            background: linear-gradient(135deg, #e0e0e0 0%, #f5f5f5 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 5rem;
+        }
+
+        .gallery-caption {
+            padding: 1rem;
+            color: #000;
+            text-align: center;
+            font-weight: 600;
         }
 
         /* How It Works */
         .how-it-works {
             padding: 6rem 0;
+            background: #f5f5f5;
         }
 
         .how-it-works h2 {
             text-align: center;
             font-size: 2.5rem;
             margin-bottom: 3rem;
-            color: #333;
+            color: #000;
         }
 
         .steps {
@@ -186,64 +452,34 @@
         .step {
             text-align: center;
             padding: 2rem;
+            background: #fff;
+            border-radius: 15px;
+            border: 2px solid #000;
         }
 
         .step-number {
-            width: 60px;
-            height: 60px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            width: 70px;
+            height: 70px;
+            background: #000;
             color: white;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 1.5rem;
+            font-size: 2rem;
             font-weight: bold;
             margin: 0 auto 1rem;
         }
 
         .step h3 {
             margin-bottom: 0.5rem;
-            color: #333;
-        }
-
-        /* Benefits */
-        .benefits {
-            padding: 6rem 0;
-            background: #f8f9fa;
-        }
-
-        .benefits h2 {
-            text-align: center;
-            font-size: 2.5rem;
-            margin-bottom: 3rem;
-            color: #333;
-        }
-
-        .benefits-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 2rem;
-        }
-
-        .benefit {
-            background: white;
-            padding: 2rem;
-            border-radius: 15px;
-            text-align: center;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-        }
-
-        .benefit h3 {
-            color: #667eea;
-            margin-bottom: 1rem;
-            font-size: 1.2rem;
+            color: #000;
         }
 
         /* Contact */
         .contact {
             padding: 6rem 0;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: #000;
             color: white;
             text-align: center;
         }
@@ -263,16 +499,23 @@
 
         .contact-form input {
             padding: 1rem;
-            border: none;
+            border: 2px solid #fff;
+            background: transparent;
+            color: #fff;
             border-radius: 10px;
             font-size: 1rem;
         }
 
+        .contact-form input::placeholder {
+            color: #888;
+        }
+
         footer {
-            background: #333;
+            background: #000;
             color: white;
             text-align: center;
             padding: 2rem 0;
+            border-top: 1px solid #333;
         }
 
         /* Responsive */
@@ -284,6 +527,15 @@
             .nav-links {
                 gap: 1rem;
             }
+
+            .dish-3d {
+                width: 200px;
+                height: 200px;
+            }
+
+            .dish-image {
+                font-size: 5rem;
+            }
         }
     </style>
 </head>
@@ -291,11 +543,11 @@
     <!-- Navigation -->
     <nav class="navbar">
         <div class="container">
-            <div class="logo">🍽️ Menuverse</div>
+            <div class="logo">🍽️ MENUVERSE</div>
             <ul class="nav-links">
+                <li><a href="#demo">Live Demo</a></li>
                 <li><a href="#features">Features</a></li>
-                <li><a href="#how-it-works">How It Works</a></li>
-                <li><a href="#benefits">Benefits</a></li>
+                <li><a href="#gallery">Gallery</a></li>
                 <li><a href="#contact" class="cta-btn">Get Started</a></li>
             </ul>
         </div>
@@ -306,8 +558,81 @@
         <div class="container">
             <h1>Transform Paper Menus into 3D AR Experiences</h1>
             <p>Elevate your restaurant's dining experience with augmented reality menus featuring instant translation, customization, and immersive stories.</p>
-            <button class="btn btn-primary" onclick="document.getElementById('contact').scrollIntoView({behavior: 'smooth'})">Request Demo</button>
+            <button class="btn btn-primary" onclick="document.getElementById('demo').scrollIntoView({behavior: 'smooth'})">Try Live Demo</button>
             <button class="btn btn-secondary" onclick="document.getElementById('features').scrollIntoView({behavior: 'smooth'})">Learn More</button>
+        </div>
+    </section>
+
+    <!-- AR Demo Section -->
+    <section id="demo" class="ar-demo">
+        <div class="container">
+            <h2>Experience AR Menu in Action</h2>
+            <p>Interact with our live demo - rotate, translate, and explore dishes in 3D</p>
+            
+            <div class="demo-container">
+                <div class="ar-viewer">
+                    <div class="dish-3d">
+                        <div class="dish-image" id="dishEmoji">🍕</div>
+                    </div>
+                    
+                    <div class="dish-info">
+                        <h3 id="dishName">Margherita Pizza</h3>
+                        <p id="dishDesc">Fresh mozzarella, tomato sauce, basil, and olive oil on a crispy crust</p>
+                        <div class="price" id="dishPrice">$12.99</div>
+                    </div>
+
+                    <div class="ar-controls">
+                        <button class="ar-btn" onclick="changeDish('pizza')">🍕 Pizza</button>
+                        <button class="ar-btn" onclick="changeDish('burger')">🍔 Burger</button>
+                        <button class="ar-btn" onclick="changeDish('sushi')">🍣 Sushi</button>
+                        <button class="ar-btn" onclick="changeDish('pasta')">🍝 Pasta</button>
+                    </div>
+
+                    <div class="translation-demo">
+                        <h4 style="margin-bottom: 1rem; color: #000;">Instant Translation</h4>
+                        <div class="language-selector">
+                            <button class="lang-btn active" onclick="translateTo('en')">English</button>
+                            <button class="lang-btn" onclick="translateTo('es')">Español</button>
+                            <button class="lang-btn" onclick="translateTo('fr')">Français</button>
+                            <button class="lang-btn" onclick="translateTo('hi')">हिंदी</button>
+                            <button class="lang-btn" onclick="translateTo('zh')">中文</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 3D Gallery -->
+    <section id="gallery" class="gallery-3d">
+        <div class="container">
+            <h2>3D Menu Gallery</h2>
+            <div class="gallery-grid">
+                <div class="gallery-item">
+                    <div class="gallery-image">🥗</div>
+                    <div class="gallery-caption">Caesar Salad</div>
+                </div>
+                <div class="gallery-item">
+                    <div class="gallery-image">🍜</div>
+                    <div class="gallery-caption">Ramen Bowl</div>
+                </div>
+                <div class="gallery-item">
+                    <div class="gallery-image">🥩</div>
+                    <div class="gallery-caption">Grilled Steak</div>
+                </div>
+                <div class="gallery-item">
+                    <div class="gallery-image">🍰</div>
+                    <div class="gallery-caption">Chocolate Cake</div>
+                </div>
+                <div class="gallery-item">
+                    <div class="gallery-image">🍷</div>
+                    <div class="gallery-caption">Wine Selection</div>
+                </div>
+                <div class="gallery-item">
+                    <div class="gallery-image">☕</div>
+                    <div class="gallery-caption">Espresso</div>
+                </div>
+            </div>
         </div>
     </section>
 
@@ -344,7 +669,7 @@
                 <div class="feature-card">
                     <div class="feature-icon">⚡</div>
                     <h3>Easy Integration</h3>
-                    <p>Quick setup with your existing paper menus - no tech expertise needed</p>
+                    <p>Quick setup with your existing paper menus</p>
                 </div>
             </div>
         </div>
@@ -379,31 +704,6 @@
         </div>
     </section>
 
-    <!-- Benefits -->
-    <section id="benefits" class="benefits">
-        <div class="container">
-            <h2>Why Choose Menuverse?</h2>
-            <div class="benefits-grid">
-                <div class="benefit">
-                    <h3>📈 Increase Orders</h3>
-                    <p>Visual 3D menus boost order values by up to 40%</p>
-                </div>
-                <div class="benefit">
-                    <h3>🌍 Global Reach</h3>
-                    <p>Serve international customers with instant translation</p>
-                </div>
-                <div class="benefit">
-                    <h3>💰 Reduce Costs</h3>
-                    <p>No more expensive menu reprints for updates</p>
-                </div>
-                <div class="benefit">
-                    <h3>⭐ Stand Out</h3>
-                    <p>Differentiate your restaurant with cutting-edge tech</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
     <!-- Contact -->
     <section id="contact" class="contact">
         <div class="container">
@@ -422,5 +722,70 @@
     <footer>
         <p>&copy; 2025 Menuverse. Transforming dining experiences with AR technology.</p>
     </footer>
+
+    <script>
+        const dishes = {
+            pizza: {
+                emoji: '🍕',
+                name: { en: 'Margherita Pizza', es: 'Pizza Margherita', fr: 'Pizza Margherita', hi: 'मार्गेरिटा पिज्जा', zh: '玛格丽特披萨' },
+                desc: { en: 'Fresh mozzarella, tomato sauce, basil, and olive oil on a crispy crust', es: 'Mozzarella fresca, salsa de tomate, albahaca y aceite de oliva sobre masa crujiente', fr: 'Mozzarella fraîche, sauce tomate, basilic et huile d\'olive sur pâte croustillante', hi: 'ताजा मोज़ेरेला, टमाटर सॉस, तुलसी और जैतून का तेल कुरकुरी परत पर', zh: '新鲜马苏里拉奶酪、番茄酱、罗勒和橄榄油配脆皮' },
+                price: '$12.99'
+            },
+            burger: {
+                emoji: '🍔',
+                name: { en: 'Classic Burger', es: 'Hamburguesa Clásica', fr: 'Burger Classique', hi: 'क्लासिक बर्गर', zh: '经典汉堡' },
+                desc: { en: 'Juicy beef patty with lettuce, tomato, cheese, and special sauce', es: 'Jugosa carne con lechuga, tomate, queso y salsa especial', fr: 'Steak juteux avec laitue, tomate, fromage et sauce spéciale', hi: 'रसीला बीफ पैटी सलाद, टमाटर, पनीर और विशेष सॉस के साथ', zh: '多汁牛肉饼配生菜、番茄、奶酪和特制酱汁' },
+                price: '$14.99'
+            },
+            sushi: {
+                emoji: '🍣',
+                name: { en: 'Sushi Platter', es: 'Plato de Sushi', fr: 'Plateau de Sushi', hi: 'सुशी प्लेटर', zh: '寿司拼盘' },
+                desc: { en: 'Fresh salmon, tuna, and avocado rolls with wasabi and soy sauce', es: 'Rollos frescos de salmón, atún y aguacate con wasabi y salsa de soja', fr: 'Rouleaux frais de saumon, thon et avocat avec wasabi et sauce soja', hi: 'ताजा सैल्मन, टूना और एवोकाडो रोल वसाबी और सोया सॉस के साथ', zh: '新鲜三文鱼、金枪鱼和牛油果卷配芥末和酱油' },
+                price: '$18.99'
+            },
+            pasta: {
+                emoji: '🍝',
+                name: { en: 'Carbonara Pasta', es: 'Pasta Carbonara', fr: 'Pâtes Carbonara', hi: 'कार्बोनारा पास्ता', zh: '培根蛋面' },
+                desc: { en: 'Creamy pasta with bacon, parmesan, and black pepper', es: 'Pasta cremosa con tocino, parmesano y pimienta negra', fr: 'Pâtes crémeuses avec bacon, parmesan et poivre noir', hi: 'बेकन, परमेसन और काली मिर्च के साथ क्रीमी पास्ता', zh: '奶油意面配培根、帕尔马干酪和黑胡椒' },
+                price: '$15.99'
+            }
+        };
+
+        let currentDish = 'pizza';
+        let currentLang = 'en';
+
+        function changeDish(dish) {
+            currentDish = dish;
+            updateDisplay();
+        }
+
+        function translateTo(lang) {
+            currentLang = lang;
+            
+            // Update active button
+            document.querySelectorAll('.lang-btn').forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+            
+            updateDisplay();
+        }
+
+        function updateDisplay() {
+            const dish = dishes[currentDish];
+            document.getElementById('dishEmoji').textContent = dish.emoji;
+            document.getElementById('dishName').textContent = dish.name[currentLang];
+            document.getElementById('dishDesc').textContent = dish.desc[currentLang];
+            document.getElementById('dishPrice').textContent = dish.price;
+        }
+
+        // Add hover effect to gallery items
+        document.querySelectorAll('.gallery-item').forEach(item => {
+            item.addEventListener('click', function() {
+                this.style.transform = 'scale(1.1) rotateZ(5deg)';
+                setTimeout(() => {
+                    this.style.transform = '';
+                }, 300);
+            });
+        });
+    </script>
 </body>
 </html>
