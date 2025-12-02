@@ -563,6 +563,24 @@
             color: #888;
         }
 
+        .success-message {
+            background: #4CAF50;
+            color: white;
+            padding: 1rem;
+            border-radius: 10px;
+            margin-top: 1rem;
+            display: none;
+        }
+
+        .error-message {
+            background: #f44336;
+            color: white;
+            padding: 1rem;
+            border-radius: 10px;
+            margin-top: 1rem;
+            display: none;
+        }
+
         footer {
             background: #000;
             color: white;
@@ -772,11 +790,13 @@
         <div class="container">
             <h2>Ready to Transform Your Menu?</h2>
             <p>Join the future of dining experiences today</p>
-            <form class="contact-form" onsubmit="event.preventDefault(); alert('Thank you for your interest! We will contact you soon.'); this.reset();">
-                <input type="text" placeholder="Restaurant Name" required>
-                <input type="email" placeholder="Email Address" required>
-                <input type="tel" placeholder="Phone Number" required>
+            <form class="contact-form" id="contactForm">
+                <input type="text" name="restaurant_name" placeholder="Restaurant Name" required>
+                <input type="email" name="email" placeholder="Email Address" required>
+                <input type="tel" name="phone" placeholder="Phone Number" required>
                 <button type="submit" class="btn btn-primary">Get Started</button>
+                <div class="success-message" id="successMessage">✅ Thank you! We'll contact you soon.</div>
+                <div class="error-message" id="errorMessage">❌ Something went wrong. Please try again.</div>
             </form>
         </div>
     </section>
@@ -840,6 +860,56 @@
             document.getElementById('dishDesc').textContent = dish.desc[currentLang];
             document.getElementById('dishPrice').textContent = dish.price;
         }
+
+        // Contact Form Submission with Email
+        document.getElementById('contactForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            const formData = new FormData(this);
+            const data = {
+                restaurant_name: formData.get('restaurant_name'),
+                email: formData.get('email'),
+                phone: formData.get('phone')
+            };
+
+            try {
+                // Send to Web3Forms (Free email service)
+                const response = await fetch('https://api.web3forms.com/submit', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Accept': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        access_key: '8f0c7e5d-4b2a-4f1e-9c3d-7a8b6e5f4d3c', // You'll need to replace this
+                        subject: 'New Menuverse Lead: ' + data.restaurant_name,
+                        from_name: 'Menuverse Website',
+                        restaurant_name: data.restaurant_name,
+                        email: data.email,
+                        phone: data.phone
+                    })
+                });
+
+                if (response.ok) {
+                    document.getElementById('successMessage').style.display = 'block';
+                    document.getElementById('errorMessage').style.display = 'none';
+                    this.reset();
+                    
+                    setTimeout(() => {
+                        document.getElementById('successMessage').style.display = 'none';
+                    }, 5000);
+                } else {
+                    throw new Error('Submission failed');
+                }
+            } catch (error) {
+                document.getElementById('errorMessage').style.display = 'block';
+                document.getElementById('successMessage').style.display = 'none';
+                
+                setTimeout(() => {
+                    document.getElementById('errorMessage').style.display = 'none';
+                }, 5000);
+            }
+        });
 
         // Add hover effect to gallery items
         document.querySelectorAll('.gallery-item').forEach(item => {
