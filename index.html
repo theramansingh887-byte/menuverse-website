@@ -24,7 +24,7 @@
             padding: 0 20px;
         }
 
-        /* Navigation - BLACK */
+        /* Navigation */
         .navbar {
             background: #000;
             padding: 1rem 0;
@@ -74,7 +74,7 @@
             font-weight: 600;
         }
 
-        /* Hero - BLACK GRADIENT */
+        /* Hero */
         .hero {
             padding: 8rem 0;
             background: linear-gradient(135deg, #000 0%, #1a1a1a 50%, #333 100%);
@@ -192,45 +192,72 @@
         }
 
         .dish-3d {
-            width: 300px;
-            height: 300px;
+            width: 350px;
+            height: 350px;
             position: relative;
             transform-style: preserve-3d;
-            animation: rotate3d 8s linear infinite;
+            animation: rotate3d 10s linear infinite;
+            perspective: 1000px;
         }
 
         @keyframes rotate3d {
-            0% { transform: rotateY(0deg) rotateX(10deg); }
-            100% { transform: rotateY(360deg) rotateX(10deg); }
+            0% { transform: rotateY(0deg) rotateX(5deg); }
+            100% { transform: rotateY(360deg) rotateX(5deg); }
         }
 
         .dish-image {
             width: 100%;
             height: 100%;
-            background: linear-gradient(135deg, #e0e0e0 0%, #f5f5f5 100%);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 8rem;
-            box-shadow: 0 20px 60px rgba(0,0,0,0.2);
+            border-radius: 20px;
             position: relative;
+            transform-style: preserve-3d;
+            box-shadow: 
+                0 30px 60px rgba(0,0,0,0.3),
+                0 15px 30px rgba(0,0,0,0.2),
+                inset 0 0 20px rgba(255,255,255,0.1);
+            overflow: hidden;
+        }
+
+        .dish-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 20px;
+            display: block;
+        }
+
+        .dish-image::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(
+                45deg,
+                transparent 30%,
+                rgba(255,255,255,0.3) 50%,
+                transparent 70%
+            );
+            animation: shine 3s infinite;
+            z-index: 1;
+        }
+
+        @keyframes shine {
+            0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
+            100% { transform: translateX(100%) translateY(100%) rotate(45deg); }
         }
 
         .dish-image::after {
             content: '';
             position: absolute;
-            width: 120%;
-            height: 120%;
-            border: 3px solid #000;
-            border-radius: 50%;
-            opacity: 0.1;
-            animation: pulse 2s ease-in-out infinite;
-        }
-
-        @keyframes pulse {
-            0%, 100% { transform: scale(1); opacity: 0.1; }
-            50% { transform: scale(1.1); opacity: 0.05; }
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            border: 3px solid rgba(0,0,0,0.1);
+            border-radius: 20px;
+            box-shadow: inset 0 0 30px rgba(0,0,0,0.2);
         }
 
         .dish-info {
@@ -310,7 +337,7 @@
             color: #fff;
         }
 
-        /* Features - WHITE BACKGROUND */
+        /* Features */
         .features {
             padding: 6rem 0;
             background: #fff;
@@ -382,7 +409,7 @@
             color: #fff;
         }
 
-        /* 3D Gallery - BLACK BACKGROUND */
+        /* 3D Gallery */
         .gallery-3d {
             padding: 6rem 0;
             background: #000;
@@ -397,7 +424,7 @@
 
         .gallery-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
             gap: 2rem;
         }
 
@@ -405,32 +432,58 @@
             background: #fff;
             border-radius: 15px;
             overflow: hidden;
-            transition: transform 0.3s;
+            transition: all 0.5s;
             cursor: pointer;
+            transform-style: preserve-3d;
+            position: relative;
         }
 
         .gallery-item:hover {
-            transform: scale(1.05) rotateZ(2deg);
+            transform: scale(1.05) rotateY(5deg) rotateX(5deg);
+            box-shadow: 0 30px 60px rgba(255,255,255,0.2);
         }
 
         .gallery-image {
             width: 100%;
-            height: 250px;
-            background: linear-gradient(135deg, #e0e0e0 0%, #f5f5f5 100%);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 5rem;
+            height: 280px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .gallery-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+
+        .gallery-item:hover .gallery-image img {
+            transform: scale(1.1);
+        }
+
+        .gallery-image::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(
+                135deg,
+                transparent 0%,
+                rgba(0,0,0,0.3) 100%
+            );
         }
 
         .gallery-caption {
-            padding: 1rem;
+            padding: 1.5rem;
             color: #000;
             text-align: center;
             font-weight: 600;
+            font-size: 1.1rem;
         }
 
-        /* How It Works - LIGHT GRAY */
+        /* How It Works */
         .how-it-works {
             padding: 6rem 0;
             background: #f5f5f5;
@@ -476,7 +529,7 @@
             color: #000;
         }
 
-        /* Contact - BLACK */
+        /* Contact */
         .contact {
             padding: 6rem 0;
             background: #000;
@@ -529,12 +582,8 @@
             }
 
             .dish-3d {
-                width: 200px;
-                height: 200px;
-            }
-
-            .dish-image {
-                font-size: 5rem;
+                width: 250px;
+                height: 250px;
             }
         }
     </style>
@@ -572,7 +621,9 @@
             <div class="demo-container">
                 <div class="ar-viewer">
                     <div class="dish-3d">
-                        <div class="dish-image" id="dishEmoji">🍕</div>
+                        <div class="dish-image" id="dishImageContainer">
+                            <img id="dishImage" src="https://images.unsplash.com/photo-1513104890138-7c749659a591?w=600&h=600&fit=crop" alt="Pizza">
+                        </div>
                     </div>
                     
                     <div class="dish-info">
@@ -609,27 +660,39 @@
             <h2>3D Menu Gallery</h2>
             <div class="gallery-grid">
                 <div class="gallery-item">
-                    <div class="gallery-image">🥗</div>
+                    <div class="gallery-image">
+                        <img src="https://images.unsplash.com/photo-1512621776951-a57141f2eefd?w=600&h=400&fit=crop" alt="Salad">
+                    </div>
                     <div class="gallery-caption">Caesar Salad</div>
                 </div>
                 <div class="gallery-item">
-                    <div class="gallery-image">🍜</div>
+                    <div class="gallery-image">
+                        <img src="https://images.unsplash.com/photo-1569718212165-3a8278d5f624?w=600&h=400&fit=crop" alt="Ramen">
+                    </div>
                     <div class="gallery-caption">Ramen Bowl</div>
                 </div>
                 <div class="gallery-item">
-                    <div class="gallery-image">🥩</div>
+                    <div class="gallery-image">
+                        <img src="https://images.unsplash.com/photo-1558030006-450675393462?w=600&h=400&fit=crop" alt="Steak">
+                    </div>
                     <div class="gallery-caption">Grilled Steak</div>
                 </div>
                 <div class="gallery-item">
-                    <div class="gallery-image">🍰</div>
+                    <div class="gallery-image">
+                        <img src="https://images.unsplash.com/photo-1578985545062-69928b1d9587?w=600&h=400&fit=crop" alt="Cake">
+                    </div>
                     <div class="gallery-caption">Chocolate Cake</div>
                 </div>
                 <div class="gallery-item">
-                    <div class="gallery-image">🍷</div>
+                    <div class="gallery-image">
+                        <img src="https://images.unsplash.com/photo-1510812431401-41d2bd2722f3?w=600&h=400&fit=crop" alt="Wine">
+                    </div>
                     <div class="gallery-caption">Wine Selection</div>
                 </div>
                 <div class="gallery-item">
-                    <div class="gallery-image">☕</div>
+                    <div class="gallery-image">
+                        <img src="https://images.unsplash.com/photo-1511920170033-f8396924c348?w=600&h=400&fit=crop" alt="Coffee">
+                    </div>
                     <div class="gallery-caption">Espresso</div>
                 </div>
             </div>
@@ -726,25 +789,25 @@
     <script>
         const dishes = {
             pizza: {
-                emoji: '🍕',
+                image: 'https://images.unsplash.com/photo-1513104890138-7c749659a591?w=600&h=600&fit=crop',
                 name: { en: 'Margherita Pizza', es: 'Pizza Margherita', fr: 'Pizza Margherita', hi: 'मार्गेरिटा पिज्जा', zh: '玛格丽特披萨' },
                 desc: { en: 'Fresh mozzarella, tomato sauce, basil, and olive oil on a crispy crust', es: 'Mozzarella fresca, salsa de tomate, albahaca y aceite de oliva sobre masa crujiente', fr: 'Mozzarella fraîche, sauce tomate, basilic et huile d\'olive sur pâte croustillante', hi: 'ताजा मोज़ेरेला, टमाटर सॉस, तुलसी और जैतून का तेल कुरकुरी परत पर', zh: '新鲜马苏里拉奶酪、番茄酱、罗勒和橄榄油配脆皮' },
                 price: '$12.99'
             },
             burger: {
-                emoji: '🍔',
+                image: 'https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=600&h=600&fit=crop',
                 name: { en: 'Classic Burger', es: 'Hamburguesa Clásica', fr: 'Burger Classique', hi: 'क्लासिक बर्गर', zh: '经典汉堡' },
                 desc: { en: 'Juicy beef patty with lettuce, tomato, cheese, and special sauce', es: 'Jugosa carne con lechuga, tomate, queso y salsa especial', fr: 'Steak juteux avec laitue, tomate, fromage et sauce spéciale', hi: 'रसीला बीफ पैटी सलाद, टमाटर, पनीर और विशेष सॉस के साथ', zh: '多汁牛肉饼配生菜、番茄、奶酪和特制酱汁' },
                 price: '$14.99'
             },
             sushi: {
-                emoji: '🍣',
+                image: 'https://images.unsplash.com/photo-1579584425555-c3ce17fd4351?w=600&h=600&fit=crop',
                 name: { en: 'Sushi Platter', es: 'Plato de Sushi', fr: 'Plateau de Sushi', hi: 'सुशी प्लेटर', zh: '寿司拼盘' },
                 desc: { en: 'Fresh salmon, tuna, and avocado rolls with wasabi and soy sauce', es: 'Rollos frescos de salmón, atún y aguacate con wasabi y salsa de soja', fr: 'Rouleaux frais de saumon, thon et avocat avec wasabi et sauce soja', hi: 'ताजा सैल्मन, टूना और एवोकाडो रोल वसाबी और सोया सॉस के साथ', zh: '新鲜三文鱼、金枪鱼和牛油果卷配芥末和酱油' },
                 price: '$18.99'
             },
             pasta: {
-                emoji: '🍝',
+                image: 'https://images.unsplash.com/photo-1621996346565-e3dbc646d9a9?w=600&h=600&fit=crop',
                 name: { en: 'Carbonara Pasta', es: 'Pasta Carbonara', fr: 'Pâtes Carbonara', hi: 'कार्बोनारा पास्ता', zh: '培根蛋面' },
                 desc: { en: 'Creamy pasta with bacon, parmesan, and black pepper', es: 'Pasta cremosa con tocino, parmesano y pimienta negra', fr: 'Pâtes crémeuses avec bacon, parmesan et poivre noir', hi: 'बेकन, परमेसन और काली मिर्च के साथ क्रीमी पास्ता', zh: '奶油意面配培根、帕尔马干酪和黑胡椒' },
                 price: '$15.99'
@@ -771,7 +834,8 @@
 
         function updateDisplay() {
             const dish = dishes[currentDish];
-            document.getElementById('dishEmoji').textContent = dish.emoji;
+            document.getElementById('dishImage').src = dish.image;
+            document.getElementById('dishImage').alt = dish.name[currentLang];
             document.getElementById('dishName').textContent = dish.name[currentLang];
             document.getElementById('dishDesc').textContent = dish.desc[currentLang];
             document.getElementById('dishPrice').textContent = dish.price;
@@ -779,11 +843,12 @@
 
         // Add hover effect to gallery items
         document.querySelectorAll('.gallery-item').forEach(item => {
-            item.addEventListener('click', function() {
-                this.style.transform = 'scale(1.1) rotateZ(5deg)';
-                setTimeout(() => {
-                    this.style.transform = '';
-                }, 300);
+            item.addEventListener('mouseenter', function() {
+                this.style.transform = 'scale(1.1) rotateY(10deg) rotateX(5deg)';
+            });
+            
+            item.addEventListener('mouseleave', function() {
+                this.style.transform = 'scale(1) rotateY(0deg) rotateX(0deg)';
             });
         });
     </script>
